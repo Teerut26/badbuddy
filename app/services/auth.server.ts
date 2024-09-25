@@ -16,7 +16,6 @@ export const authenticator = new Authenticator<User>(sessionStorage);
 // Tell the Authenticator to use the form strategy
 authenticator.use(
     new FormStrategy(async ({ form }) => {
-        console.log(form);
 
         const email = form.get("email");
         const password = form.get("password");

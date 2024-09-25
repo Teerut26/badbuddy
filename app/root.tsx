@@ -6,6 +6,7 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
+    useLoaderData,
     useNavigation,
 } from "@remix-run/react";
 import type {
@@ -22,6 +23,7 @@ import { nprogress, NavigationProgress } from "@mantine/nprogress";
 import AppShellLayout from "./layouts/AppShellLayout";
 import { useEffect } from "react";
 import { authenticator } from "./services/auth.server";
+import useAuthStore from "./store/auth.store";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: stylesheet },
@@ -78,16 +80,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    const user = await authenticator.isAuthenticated(request, {
-        successRedirect: "/",
-    });
-    console.log(user);
-    
-    // If the user is already authenticated redirect to /dashboard directly
-    return user;
+    const user = await authenticator.isAuthenticated(request);
+
+    if (user) {
+        // here the user is authenticated
+        return user;
+    } else {
+        // here the user is not authenticated
+        return null;
+    }
 }
 
 export default function App() {
+    const user = useLoaderData<typeof loader>();
+    const auth = useAuthStore();
+
+    useEffect(() => {
+        auth.setUser(user);
+    }, [user]);
+
     return (
         <AppShellLayout>
             <Outlet />
