@@ -53,7 +53,19 @@ export default function AppShellLayout({
                         size="sm"
                     />
                     <Link to={"/"}>
-                        <Image src="/logo.svg" alt="Remix" height={30} />
+                        {colorScheme === "dark" ? (
+                            <Image
+                                src="/logo-white.svg"
+                                alt="Remix"
+                                height={30}
+                            />
+                        ) : (
+                            <Image
+                                src="/logo-black.svg"
+                                alt="Remix"
+                                height={30}
+                            />
+                        )}
                     </Link>
                 </Group>
                 {colorScheme === "dark" ? (
