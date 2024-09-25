@@ -17,7 +17,7 @@ export default function PartiesIndex() {
             </Drawer>
             <div className="flex flex-col gap-2">
                 <div className="text-xl font-bold">สำรวจปาร์ตี้</div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 f-full">
                     <TextInput
                         placeholder="ค้นหา"
                         size="md"

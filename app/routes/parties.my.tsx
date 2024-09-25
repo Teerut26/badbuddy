@@ -1,10 +1,11 @@
 import { Button, Drawer, TextInput } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { IconFilter, IconPlus, IconSearch } from "@tabler/icons-react";
 import PartyCard from "~/components/Parties/PartyCard/PartyCard";
 
 export default function PartiesMy() {
     const [opened, { open, close }] = useDisclosure(false);
+    const isMobile = useMediaQuery("(max-width: 768px)");
     return (
         <>
             <Drawer
@@ -16,22 +17,35 @@ export default function PartiesMy() {
                 {/* Drawer content */}
             </Drawer>
             <div className="flex flex-col gap-2">
-                <div className="text-xl font-bold">ปาร์ตี้ของฉัน</div>
-                <div className="flex gap-3">
-                    <TextInput
-                        placeholder="ค้นหา"
-                        size="md"
-                        leftSection={<IconSearch size={17} />}
-                        className="w-full"
-                        maw={500}
-                    />
-                    <div>
+                <div className="flex flex-col-reverse md:flex-row justify-between items-end gap-y-4">
+                    <div className="flex flex-col gap-2 w-full">
+                        <div className="text-xl font-bold">ปาร์ตี้ของฉัน</div>
+                        <div className="flex gap-3 w-full">
+                            <TextInput
+                                placeholder="ค้นหา"
+                                size="md"
+                                leftSection={<IconSearch size={17} />}
+                                className="w-full"
+                                maw={500}
+                            />
+                            <div>
+                                <Button
+                                    onClick={open}
+                                    size="md"
+                                    leftSection={<IconFilter size={17} />}
+                                >
+                                    กรอง
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex justify-end ml-3 w-full md:w-fit">
                         <Button
-                            onClick={open}
                             size="md"
-                            leftSection={<IconFilter size={17} />}
+                            leftSection={<IconPlus size={17} />}
+                            fullWidth={isMobile}
                         >
-                            กรอง
+                            เพิ่มปาร์ตี้
                         </Button>
                     </div>
                 </div>
