@@ -1,5 +1,5 @@
 import { Button, Card } from "@mantine/core";
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import {
     IconCalendar,
@@ -7,6 +7,14 @@ import {
     IconUserCheck,
 } from "@tabler/icons-react";
 import BackButton from "~/components/BackButton/BackButton";
+
+// for make seo
+export const meta: MetaFunction = () => {
+    return [
+        { title: `Bad Buddy | ${"ตี้โหดตบมัน"}` },
+        { name: "description", content: `Bad Buddy | ${"ตี้โหดตบมัน"}` },
+    ];
+};
 
 export async function loader({ params }: LoaderFunctionArgs) {
     return params.id;
