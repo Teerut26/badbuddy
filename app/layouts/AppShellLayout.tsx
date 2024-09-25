@@ -7,7 +7,9 @@ import {
     useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useLocation } from "@remix-run/react";
 import { IconMoon, IconSun } from "@tabler/icons-react";
+import { useEffect } from "react";
 import { Menu } from "~/components/Menu/Menu";
 
 export default function AppShellLayout({
@@ -15,9 +17,16 @@ export default function AppShellLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const location = useLocation();
     const { setColorScheme, colorScheme } = useMantineColorScheme();
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+    useEffect(() => {
+        if (mobileOpened) {
+            toggleMobile();
+        }
+    }, [location.pathname]);
 
     return (
         <AppShell
