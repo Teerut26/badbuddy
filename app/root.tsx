@@ -1,13 +1,18 @@
 import "@mantine/core/styles.css";
 import {
     Links,
+    LiveReload,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
     useNavigation,
 } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+    LinksFunction,
+    LoaderFunctionArgs,
+    MetaFunction,
+} from "@remix-run/node";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import stylesheet from "~/tailwind.css?url";
@@ -16,6 +21,7 @@ import "@mantine/nprogress/styles.css";
 import { nprogress, NavigationProgress } from "@mantine/nprogress";
 import AppShellLayout from "./layouts/AppShellLayout";
 import { useEffect } from "react";
+import { authenticator } from "./services/auth.server";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: stylesheet },
@@ -44,6 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             nprogress.complete();
         }
     }, [navigation.state]);
+
     return (
         <html lang="en">
             <head>
@@ -60,15 +67,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <MantineProvider theme={themeMantine}>
                     <NavigationProgress />
                     <Notifications position="top-right" />
-                    <AppShellLayout>{children}</AppShellLayout>
+                    {children}
                 </MantineProvider>
                 <ScrollRestoration />
                 <Scripts />
+                <LiveReload />
             </body>
         </html>
     );
 }
 
+export async function loader({ request }: LoaderFunctionArgs) {
+    const user = await authenticator.isAuthenticated(request, {
+        successRedirect: "/",
+    });
+    console.log(user);
+    
+    // If the user is already authenticated redirect to /dashboard directly
+    return user;
+}
+
 export default function App() {
-    return <Outlet />;
+    return (
+        <AppShellLayout>
+            <Outlet />
+        </AppShellLayout>
+    );
 }

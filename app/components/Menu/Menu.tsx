@@ -2,7 +2,7 @@ import { IconLogout, IconInputSearch, IconUser } from "@tabler/icons-react";
 import clsx from "clsx";
 import classes from "./Menu.module.css";
 import { Button } from "@mantine/core";
-import { useLocation, useNavigate } from "@remix-run/react";
+import { Form, useLocation, useNavigate } from "@remix-run/react";
 
 const data = [
     { link: "/parties", label: "สำรวจปาร์ตี้", icon: IconInputSearch },
@@ -33,9 +33,13 @@ export function Menu() {
     return (
         <nav>
             <div className={clsx("flex flex-col gap-2")}>{links}</div>
-            <div className={classes.footer}>
+            <Form
+                className={classes.footer}
+                method="post"
+                action="/auth/sign-out"
+            >
                 <Button
-                    // onClick={() => signOut({ callbackUrl: "/" })}
+                    type="submit"
                     justify="start"
                     variant={"subtle"}
                     color="red"
@@ -44,7 +48,7 @@ export function Menu() {
                 >
                     ออกจากระบบ
                 </Button>
-            </div>
+            </Form>
         </nav>
     );
 }
