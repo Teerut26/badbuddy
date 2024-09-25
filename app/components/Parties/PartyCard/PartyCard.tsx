@@ -1,8 +1,12 @@
-import { Button, Card } from "@mantine/core";
+import { Card } from "@mantine/core";
 
 export default function PartyCard() {
     return (
-        <Card padding="lg" withBorder>
+        <Card
+            padding="lg"
+            withBorder
+            className="hover:cursor-pointer hover:border-blue-400 hover:shadow"
+        >
             <div className="text-xl font-bold">ตี้โหดตบมัน</div>
 
             <div className="flex flex-col leading-5 mt-3">
@@ -23,10 +27,6 @@ export default function PartyCard() {
                     <div>3</div>
                 </div>
             </div>
-
-            <Button color="blue" fullWidth mt="md" radius="md">
-                Book classic tour now
-            </Button>
         </Card>
     );
 }
