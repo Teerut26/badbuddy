@@ -10,7 +10,7 @@ export default function BackButton() {
                 leftSection={<IconChevronLeft size={17} />}
                 onClick={() => navigate(-1)}
                 variant={"transparent"}
-                className="-translate-x-4"
+                className="-translate-x-4 transform-none"
             >
                 กลับ
             </Button>
