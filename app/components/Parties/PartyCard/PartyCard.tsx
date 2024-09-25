@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
+import { Button, Card } from "@mantine/core";
 
 export default function PartyCard() {
     return (
