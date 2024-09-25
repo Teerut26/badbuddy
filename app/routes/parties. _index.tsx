@@ -1,7 +1,7 @@
 import { Button, Drawer, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-// import { notifications } from "@mantine/notifications";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
+import PartyCard from "~/components/Parties/PartyCard/PartyCard";
 
 export default function PartiesIndex() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -28,18 +28,17 @@ export default function PartiesIndex() {
                     <div>
                         <Button
                             onClick={open}
-                            // onClick={() =>
-                            //     notifications.show({
-                            //       title: 'Default notification',
-                            //       message: 'Do not forget to star Mantine on GitHub! 🌟',
-                            //     })
-                            //   }
                             size="md"
                             leftSection={<IconFilter size={17} />}
                         >
                             กรอง
                         </Button>
                     </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
+                    {...new Array(9)
+                        .fill(0)
+                        .map((_, index) => <PartyCard key={index} />)}
                 </div>
             </div>
         </>
