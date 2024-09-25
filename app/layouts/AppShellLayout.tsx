@@ -7,7 +7,7 @@ import {
     useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useLocation } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { Menu } from "~/components/Menu/Menu";
@@ -52,7 +52,9 @@ export default function AppShellLayout({
                         visibleFrom="sm"
                         size="sm"
                     />
-                    <Image src="/logo.svg" alt="Remix" height={30} />
+                    <Link to={"/"}>
+                        <Image src="/logo.svg" alt="Remix" height={30} />
+                    </Link>
                 </Group>
                 {colorScheme === "dark" ? (
                     <ActionIcon
