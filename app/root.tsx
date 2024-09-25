@@ -6,10 +6,16 @@ import {
     Scripts,
     ScrollRestoration,
 } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/node";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import "./tailwind.css";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+import stylesheet from "~/tailwind.css?url";
+import "@mantine/notifications/styles.css";
 import AppShellLayout from "./layouts/AppShellLayout";
+
+export const links: LinksFunction = () => [
+    { rel: "stylesheet", href: stylesheet },
+];
 
 export const meta: MetaFunction = () => {
     return [
@@ -17,6 +23,13 @@ export const meta: MetaFunction = () => {
         { name: "description", content: "Bad Buddy" },
     ];
 };
+
+const themeMantine = createTheme({
+    fontFamily: "Anuphan",
+    radius: {
+        sm: "0.8rem",
+    },
+});
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -32,7 +45,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <ColorSchemeScript />
             </head>
             <body>
-                <MantineProvider>
+                <MantineProvider theme={themeMantine}>
+                    <Notifications position="top-right" />
                     <AppShellLayout>{children}</AppShellLayout>
                 </MantineProvider>
                 <ScrollRestoration />
