@@ -1,5 +1,13 @@
-import { AppShell, Burger, Group, Image } from "@mantine/core";
+import {
+    ActionIcon,
+    AppShell,
+    Burger,
+    Group,
+    Image,
+    useMantineColorScheme,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { Menu } from "~/components/Menu/Menu";
 
 export default function AppShellLayout({
@@ -7,10 +15,10 @@ export default function AppShellLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const { setColorScheme, colorScheme } = useMantineColorScheme();
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
-    // return <div>asdf{children}</div>;
     return (
         <AppShell
             header={{ height: 60 }}
@@ -22,7 +30,7 @@ export default function AppShellLayout({
             padding="md"
         >
             <AppShell.Header className="flex items-center gap-2 px-3">
-                <Group h="100%" px="md">
+                <Group h="100%" px="md" w="100%">
                     <Burger
                         opened={mobileOpened}
                         onClick={toggleMobile}
@@ -37,6 +45,21 @@ export default function AppShellLayout({
                     />
                     <Image src="/logo.svg" alt="Remix" height={30} />
                 </Group>
+                {colorScheme === "dark" ? (
+                    <ActionIcon
+                        variant="subtle"
+                        onClick={() => setColorScheme("light")}
+                    >
+                        <IconSun size={18} />
+                    </ActionIcon>
+                ) : (
+                    <ActionIcon
+                        variant="subtle"
+                        onClick={() => setColorScheme("dark")}
+                    >
+                        <IconMoon size={18} />
+                    </ActionIcon>
+                )}
             </AppShell.Header>
             <AppShell.Navbar p="sm">
                 <Menu />

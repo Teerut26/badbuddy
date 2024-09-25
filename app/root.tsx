@@ -57,7 +57,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <ColorSchemeScript />
             </head>
             <body>
-                {navigation.state !== "idle" ? <div>Loading...</div> : null}
                 <MantineProvider theme={themeMantine}>
                     <NavigationProgress />
                     <Notifications position="top-right" />
