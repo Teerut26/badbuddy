@@ -2,7 +2,8 @@ import { IconLogout, IconInputSearch, IconUser } from "@tabler/icons-react";
 import clsx from "clsx";
 import classes from "./Menu.module.css";
 import { Button } from "@mantine/core";
-import { useLocation, useNavigate } from "@remix-run/react";
+import { Form, useLocation, useNavigate } from "@remix-run/react";
+import useAuthStore from "~/store/auth.store";
 
 const data = [
     { link: "/parties", label: "สำรวจปาร์ตี้", icon: IconInputSearch },
@@ -11,6 +12,7 @@ const data = [
 
 export function Menu() {
     const { pathname } = useLocation();
+    const auth = useAuthStore();
     const navigate = useNavigate();
 
     const isCurrentPath = (link: string) => {
@@ -33,18 +35,24 @@ export function Menu() {
     return (
         <nav>
             <div className={clsx("flex flex-col gap-2")}>{links}</div>
-            <div className={classes.footer}>
-                <Button
-                    // onClick={() => signOut({ callbackUrl: "/" })}
-                    justify="start"
-                    variant={"subtle"}
-                    color="red"
-                    fullWidth
-                    leftSection={<IconLogout stroke={1.5} />}
+            {auth.user !== null && (
+                <Form
+                    className={classes.footer}
+                    method="post"
+                    action="/auth/sign-out"
                 >
-                    ออกจากระบบ
-                </Button>
-            </div>
+                    <Button
+                        type="submit"
+                        justify="start"
+                        variant={"subtle"}
+                        color="red"
+                        fullWidth
+                        leftSection={<IconLogout stroke={1.5} />}
+                    >
+                        ออกจากระบบ
+                    </Button>
+                </Form>
+            )}
         </nav>
     );
 }
