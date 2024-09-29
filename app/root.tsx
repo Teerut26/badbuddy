@@ -7,6 +7,7 @@ import {
     Scripts,
     ScrollRestoration,
     useLoaderData,
+    useLocation,
     useNavigation,
 } from "@remix-run/react";
 import type {
@@ -19,6 +20,7 @@ import { Notifications } from "@mantine/notifications";
 import stylesheet from "~/tailwind.css?url";
 import "@mantine/notifications/styles.css";
 import "@mantine/nprogress/styles.css";
+import '@mantine/dates/styles.css';
 import { nprogress, NavigationProgress } from "@mantine/nprogress";
 import AppShellLayout from "./layouts/AppShellLayout";
 import { useEffect } from "react";
@@ -98,6 +100,8 @@ export default function App() {
     useEffect(() => {
         auth.setUser(user);
     }, [user]);
+
+    // const  = []
 
     return (
         <AppShellLayout>

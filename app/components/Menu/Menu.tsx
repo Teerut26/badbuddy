@@ -1,4 +1,10 @@
-import { IconLogout, IconInputSearch, IconUser } from "@tabler/icons-react";
+import {
+    IconLogout,
+    IconInputSearch,
+    IconUser,
+    IconLogin,
+    IconLogin2,
+} from "@tabler/icons-react";
 import clsx from "clsx";
 import classes from "./Menu.module.css";
 import { Button } from "@mantine/core";
@@ -35,7 +41,7 @@ export function Menu() {
     return (
         <nav>
             <div className={clsx("flex flex-col gap-2")}>{links}</div>
-            {auth.user !== null && (
+            {auth.user !== null ? (
                 <Form
                     className={classes.footer}
                     method="post"
@@ -52,6 +58,18 @@ export function Menu() {
                         ออกจากระบบ
                     </Button>
                 </Form>
+            ) : (
+                <div className={classes.footer}>
+                    <Button
+                        onClick={() => navigate("/auth/sign-in")}
+                        justify="start"
+                        variant={"subtle"}
+                        fullWidth
+                        leftSection={<IconLogin2 stroke={1.5} />}
+                    >
+                        ออกจากระบบ
+                    </Button>
+                </div>
             )}
         </nav>
     );

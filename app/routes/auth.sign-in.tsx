@@ -5,25 +5,23 @@ import { authenticator } from "~/services/auth.server";
 
 export default function SignIn() {
     return (
-        <div className="flex justify-center items-center">
-            <Card>
-                <Form className="flex flex-col gap-3" method="post">
-                    <TextInput
-                        name="email"
-                        placeholder="Email"
-                        withAsterisk
-                        label="Email"
-                    />
-                    <PasswordInput
-                        name="password"
-                        placeholder="Password"
-                        withAsterisk
-                        label="Password"
-                    />
-                    <Button type="submit">เข้าสู่ระบบ</Button>
-                </Form>
-            </Card>
-        </div>
+        <Form className="flex flex-col gap-3" method="post">
+            <TextInput
+                name="email"
+                placeholder="Email"
+                withAsterisk
+                label="Email"
+                size="md"
+            />
+            <PasswordInput
+                name="password"
+                placeholder="Password"
+                withAsterisk
+                size="md"
+                label="Password"
+            />
+            <Button className="mt-3" size="md" type="submit">เข้าสู่ระบบ</Button>
+        </Form>
     );
 }
 

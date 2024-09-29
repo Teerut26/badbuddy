@@ -1,11 +1,13 @@
 import { Button, Drawer, TextInput } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useNavigate } from "@remix-run/react";
 import { IconFilter, IconPlus, IconSearch } from "@tabler/icons-react";
 import PartyCard from "~/components/Parties/PartyCard/PartyCard";
 
 export default function PartiesMy() {
     const [opened, { open, close }] = useDisclosure(false);
     const isMobile = useMediaQuery("(max-width: 768px)");
+    const navigate = useNavigate();
     return (
         <>
             <Drawer
@@ -44,6 +46,7 @@ export default function PartiesMy() {
                             size="md"
                             leftSection={<IconPlus size={17} />}
                             fullWidth={isMobile}
+                            onClick={() => navigate("/parties/new")}
                         >
                             เพิ่มปาร์ตี้
                         </Button>
