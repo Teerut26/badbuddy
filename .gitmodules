@@ -1,0 +1,12 @@
+[submodule "badbuddy-admin"]
+	path = badbuddy-admin
+	url = https://github.com/SmoothBrain-Tech-X/badbuddy-admin
+[submodule "badbuddy-venue"]
+	path = badbuddy-venue
+	url = https://github.com/SmoothBrain-Tech-X/badbuddy-venue
+[submodule "badbuddy-be"]
+	path = badbuddy-be
+	url = https://github.com/SmoothBrain-Tech-X/badbuddy-be
+[submodule "badbuddy-fe"]
+	path = badbuddy-fe
+	url = https://github.com/SmoothBrain-Tech-X/badbuddy-fe
