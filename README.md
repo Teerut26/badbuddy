@@ -1,6 +1,6 @@
 # BadBuddy Project
 
-This repository contains multiple projects related to the BadBuddy application. Each project serves a different purpose and is organized into separate directories.
+This repository a web application that facilitates organizing badminton meetups by allowing users to create events, invite participants, and manage badminton court bookings. `(01418471 Software Design and Development coursework)`
 
 ![image1](./files/Screenshot%202567-11-06%20at%2003.06.17.png)
 ![image2](./files/Screenshot%202567-11-06%20at%2003.06.31.png)
